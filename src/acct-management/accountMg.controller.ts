@@ -48,9 +48,11 @@ export class AccountMgController {
 
     @Post('place-pnd')
     async freezeAccount(@Body() freezeAccountParam: FreezeAccountDto): Promise<AcctMgRes>{
+        console.log(freezeAccountParam)
         const freezeAccParam: FreezeAccountReq = {
             foracid: freezeAccountParam.foracid,
-            type: 'freeze'
+            freezeDescription: freezeAccountParam.freezeDescription,
+            freezeReasonCode: freezeAccountParam.freezeReasonCode
         }
         const freezeAccountFI = new FreezeAccountFI(freezeAccParam)
         this.payload = freezeAccountFI.soapRequest()
@@ -64,7 +66,7 @@ export class AccountMgController {
     async unfreezeAccount(@Body() unfreezeAccountParam: UnfreezeAccountDto): Promise<AcctMgRes>{
         const unfreezeAccParam: UnfreezeAccountReq = {
             foracid: unfreezeAccountParam.foracid,
-            type: 'unfreeze'
+            freezeReasonCode: unfreezeAccountParam.freezeReasonCode
         } 
         const unfreezeAccountFI = new UnfreezeAccountFI(unfreezeAccParam)
         this.payload = unfreezeAccountFI.soapRequest()

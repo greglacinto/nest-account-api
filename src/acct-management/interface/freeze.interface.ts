@@ -1,4 +1,5 @@
 export interface FreezeAccountReq {
     foracid: number
-    type: string
+    freezeDescription: string
+    freezeReasonCode: string
 }

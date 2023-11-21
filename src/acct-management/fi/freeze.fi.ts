@@ -5,17 +5,19 @@ export class FreezeAccountFI{
 
     constructor(payload: FreezeAccountReq){
         this.requestBody = payload
+
     }
 
     soapRequest() {
         const xml = `
             <executeFinacleScriptRequest>
             <ExecuteFinacleScriptInputVO>
-                <requestId>fi_hccfm.scr</requestId>
+                <requestId>${process.env.FICUSTOM_FREEZE}</requestId>
             </ExecuteFinacleScriptInputVO>
             <executeFinacleScript_CustomData>
-                <foracid>${this.requestBody.foracid}</foracid>
-                <type>${this.requestBody.type}<type>
+                <FreezeReasonCode>${this.requestBody.freezeReasonCode}</FreezeReasonCode>
+                <FreezeDescription>${this.requestBody.freezeDescription}</FreezeDescription>
+                <AccountNumber>${this.requestBody.foracid}</AccountNumber>
             </executeFinacleScript_CustomData>
             </executeFinacleScriptRequest>
         `;

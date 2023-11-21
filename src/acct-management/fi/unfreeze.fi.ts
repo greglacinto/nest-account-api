@@ -11,11 +11,11 @@ export class UnfreezeAccountFI{
         const xml = `
             <executeFinacleScriptRequest>
             <ExecuteFinacleScriptInputVO>
-                <requestId>fi_hccfm.scr</requestId>
+                <requestId>${process.env.FICUSTOM_UNFREEZE}</requestId>
             </ExecuteFinacleScriptInputVO>
             <executeFinacleScript_CustomData>
-                <foracid>${this.requestBody.foracid}</foracid>
-                <type>${this.requestBody.type}<type>
+                <AccountNumber>${this.requestBody.foracid}</AccountNumber>
+                <FreezeReasonCode>${this.requestBody.freezeReasonCode}</FreezeReasonCode>
             </executeFinacleScript_CustomData>
             </executeFinacleScriptRequest>
         `;
