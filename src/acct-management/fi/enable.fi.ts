@@ -12,7 +12,7 @@ export class EnableAccountFI{
         const xml = `
             <executeFinacleScriptRequest>
             <ExecuteFinacleScriptInputVO>
-                <requestId>fi_hccfm.scr</requestId>
+                <requestId>${process.env.FICUSTOM_ENABLEACC}</requestId>
             </ExecuteFinacleScriptInputVO>
             <executeFinacleScript_CustomData>
                 <foracid>${this.requestBody.foracid}</foracid>

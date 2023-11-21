@@ -12,7 +12,7 @@ export class DisableAccountFI{
         const xml = `
             <executeFinacleScriptRequest>
             <ExecuteFinacleScriptInputVO>
-                <requestId>fi_hccfm.scr</requestId>
+                <requestId>${process.env.FICUSTOM_DISABLEACC}</requestId>
             </ExecuteFinacleScriptInputVO>
             <executeFinacleScript_CustomData>
                 <foracid>${this.requestBody.cifId}</foracid>
