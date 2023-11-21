@@ -10,7 +10,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Account API')
     .setDescription('The Account API description')
-    .setVersion('1.0')
+    .setVersion('4.0')
     // .addTag('accounts')
     .build();
   const document = SwaggerModule.createDocument(app, config);
