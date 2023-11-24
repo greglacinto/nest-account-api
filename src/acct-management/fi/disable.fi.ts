@@ -15,7 +15,8 @@ export class DisableAccountFI{
                 <requestId>${process.env.FICUSTOM_DISABLEACC}</requestId>
             </ExecuteFinacleScriptInputVO>
             <executeFinacleScript_CustomData>
-                <foracid>${this.requestBody.cifId}</foracid>
+                <CifId>${this.requestBody.cifId}</CifId>
+                <AccountNumber>${this.requestBody.foracid}</AccountNumber>
             </executeFinacleScript_CustomData>
             </executeFinacleScriptRequest>
         `;

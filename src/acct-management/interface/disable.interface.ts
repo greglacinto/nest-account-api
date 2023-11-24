@@ -1,3 +1,4 @@
 export interface DisableAccountReq {
-    cifId: string;
+    cifId: string
+    foracid: string
 }

@@ -24,7 +24,7 @@ export class AccountMgController {
 
     constructor(private accountMgService: AccountMgService){}
     
-    @Post('disable')
+    @Post('disable/staff')
     async disableAccount(@Body() disableAccountParam: DisableAccountDto): Promise<AcctMgRes>{
         const disableAccParam = disableAccountParam
         const disableAccoutFI = new DisableAccountFI(disableAccParam)
