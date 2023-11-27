@@ -24,6 +24,7 @@ export class AccountMgController {
 
     constructor(private accountMgService: AccountMgService){}
 
+
     @Get('test')
     async testEndpoint(){
         function returnValueAfter5Seconds(param: any) {
@@ -56,7 +57,6 @@ export class AccountMgController {
         const disableAccoutFI = new DisableAccountFI(disableAccParam)
         this.payload = disableAccoutFI.soapRequest()
         this.res = await this.accountMgService.manage(this.payload)
-        console.log(this.res)
         this.responseJson = await controllerHelper(this.res, process.env.SERVICE_ACCTMG)
         return this.responseJson
     }
@@ -67,14 +67,12 @@ export class AccountMgController {
         const enableAccountFI = new EnableAccountFI(enableAccParam)
         this.payload = enableAccountFI.soapRequest()
         this.res = await this.accountMgService.manage(this.payload)
-        console.log(this.res)
         this.responseJson = await controllerHelper(this.res, process.env.SERVICE_ACCTMG)
         return this.responseJson
     }
 
     @Post('place-pnd')
     async freezeAccount(@Body() freezeAccountParam: FreezeAccountDto): Promise<AcctMgRes>{
-        console.log(freezeAccountParam)
         const freezeAccParam: FreezeAccountReq = {
             foracid: freezeAccountParam.foracid,
             freezeDescription: freezeAccountParam.freezeDescription,
@@ -83,7 +81,6 @@ export class AccountMgController {
         const freezeAccountFI = new FreezeAccountFI(freezeAccParam)
         this.payload = freezeAccountFI.soapRequest()
         this.res = await this.accountMgService.manage(this.payload)
-        console.log(this.res)
         this.responseJson = await controllerHelper(this.res, process.env.SERVICE_ACCTMG)
         return this.responseJson
     }
@@ -97,7 +94,6 @@ export class AccountMgController {
         const unfreezeAccountFI = new UnfreezeAccountFI(unfreezeAccParam)
         this.payload = unfreezeAccountFI.soapRequest()
         this.res = await this.accountMgService.manage(this.payload)
-        console.log(this.res)
         this.responseJson = await controllerHelper(this.res, process.env.SERVICE_ACCTMG)
         return this.responseJson
     }

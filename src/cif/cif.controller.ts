@@ -33,7 +33,6 @@ export class CifController {
         const retCustFi = new RetCustFI(retParam)
         this.payload = retCustFi.soapRequest()
         this.res = await this.cifService.create(this.payload, process.env.SERVICE_RET)
-        console.log(this.res)
         this.responseJson  = await controllerHelper(this.res, process.env.SERVICE_RET)
         return this.responseJson
     }
@@ -44,7 +43,6 @@ export class CifController {
         const corpCustFI = new CorpCustFI(corpParam)
         this.payload = corpCustFI.soapRequest()
         this.res = await this.cifService.create(this.payload, process.env.SERVICE_CORP)
-        console.log(this.res)
         this.responseJson = await controllerHelper(this.res, process.env.SERVICE_CORP)
         return this.responseJson
     }
@@ -55,7 +53,6 @@ export class CifController {
         const minorCustFI = new MinorCustFI(minorParam)
         this.payload = minorCustFI.soapRequest()
         this.res = await this.cifService.create(this.payload, process.env.SERVICE_RET)
-        console.log(this.res)
 
         this.responseJson  = await controllerHelper(this.res, process.env.SERVICE_RET)
         return this.responseJson
@@ -67,12 +64,10 @@ export class CifController {
         const verifyCifFI = new VerifyCifFi(verifyCifParam)
         this.payload = verifyCifFI.soapRequest()
         this.res = await this.cifService.create(this.payload, process.env.SERVICE_VERIFY)
-        console.log(this.res)
         this.responseJson = await controllerHelper(this.res, process.env.SERVICE_VERIFY)
 
         if (this.responseJson.status == "SUCCESS"){
             const cifLinkJob = await this.LinkCif(verifyCifParam.cifId)
-            console.log(cifLinkJob.message)
         }
             
         return this.responseJson
@@ -83,7 +78,6 @@ export class CifController {
         const linkCifFI = new LinkCifFi(cif)
         this.payload = linkCifFI.soapRequest()
         this.res = await this.accountMgService.manage(this.payload)
-        console.log(this.res)
         const linkResponse = await controllerHelper(this.res, process.env.SERVICE_ACCTMG)
         return linkResponse
     }

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, NotFoundException } from "@nestjs/common"
+import { NotFoundException } from "@nestjs/common"
 
 export function FIxml(data: any, service: string){
 
@@ -12,7 +12,6 @@ export function FIxml(data: any, service: string){
     }
 
     if (service == process.env.SERVICE_RET) {
-        console.log(data.FIXML)
         return data.FIXML
             .Body[0]
             .RetCustAddResponse[0]

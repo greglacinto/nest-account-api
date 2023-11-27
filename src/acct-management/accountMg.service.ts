@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import * as https from 'https'
 import axios, { AxiosError } from 'axios';
 import { wrapper } from 'src/shared/soap/wrapper';
@@ -6,6 +6,8 @@ import {xmlParser} from '../middleware/parser'
 
 @Injectable()
 export class AccountMgService {
+    private readonly loggerService = new Logger(AccountMgService.name)
+
     async manage( payload: string){
 
         const url = process.env.INTEGRATOR_URL
@@ -15,6 +17,8 @@ export class AccountMgService {
             channelId: process.env.CHNID_ACC
         }
         const soapRequest = wrapper(request)
+        this.loggerService.log(soapRequest)
+
         const config = {
             headers: {
               'Content-Type': 'text/xml',
@@ -25,11 +29,11 @@ export class AccountMgService {
                 rejectUnauthorized: false
             })
         }
-        console.log(soapRequest)
+        
         const response: any = await axios 
             .post(url, soapRequest, config)
             .catch((err: AxiosError) => {
-                console.log(err.stack)
+                this.loggerService.log(err.stack)
                 throw new NotFoundException(err.message);
             })
         
