@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { DisableAccountDto } from './dto/disable.dto';
 import { EnableAccountDto } from './dto/enable.dto';
@@ -23,6 +23,32 @@ export class AccountMgController {
     responseJson: AcctMgRes
 
     constructor(private accountMgService: AccountMgService){}
+
+    @Get('test')
+    async testEndpoint(){
+        function returnValueAfter5Seconds(param: any) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(param)
+                }, 5000)
+            })
+        }
+
+        const res = await returnValueAfter5Seconds("Hello")
+
+        if(res){
+            return {
+                statusCode: '200',
+                data: 'successful get'
+            }
+        } else {
+            return {
+                statusCode: '500',
+                data: 'Unsuccessful get'
+            }
+        }
+        
+    }
     
     @Post('disable/staff')
     async disableAccount(@Body() disableAccountParam: DisableAccountDto): Promise<AcctMgRes>{
