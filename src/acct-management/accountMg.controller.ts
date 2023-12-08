@@ -23,33 +23,6 @@ export class AccountMgController {
     responseJson: AcctMgRes
 
     constructor(private accountMgService: AccountMgService){}
-
-
-    @Get('test')
-    async testEndpoint(){
-        function returnValueAfter5Seconds(param: any) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(param)
-                }, 5000)
-            })
-        }
-
-        const res = await returnValueAfter5Seconds("Hello")
-
-        if(res){
-            return {
-                statusCode: '200',
-                data: 'successful get'
-            }
-        } else {
-            return {
-                statusCode: '500',
-                data: 'Unsuccessful get'
-            }
-        }
-        
-    }
     
     @Post('disable/staff')
     async disableAccount(@Body() disableAccountParam: DisableAccountDto): Promise<AcctMgRes>{

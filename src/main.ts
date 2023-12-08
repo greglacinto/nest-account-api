@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
+import { initOracleClient } from 'oracledb'
+import { connection } from './acct-details/database/pool.database';
 
 async function bootstrap() {
 
@@ -17,6 +19,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
+  
+  //enable thick mode
+  initOracleClient()
+  //start connectioin pool
+  connection()
+  
   const port = process.env.PORT || 3000
   await app.listen(port, () => {console.log(`account-api up and running on port ${port}`)});
 }

@@ -9,6 +9,10 @@ import { CifController } from './cif/cif.controller';
 import { CifService } from './cif/cif.service';
 import { AccountMgController } from './acct-management/accountMg.controller';
 import { AccountMgService } from './acct-management/accountMg.service';
+import { AcctDetailsController } from './acct-details/acct-details.controller';
+import { AcctDetailsService } from './acct-details/acct-details.service';
+import { InquiryController } from './inquiry/inquiry.controller';
+import { InquiryService } from './inquiry/inquiry.service';
 
 @Module({
   imports: [
@@ -17,9 +21,9 @@ import { AccountMgService } from './acct-management/accountMg.service';
       ttl: 60,
       limit: 100,
     }]),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot()
   ],
-  controllers: [ AccountController, CifController, AccountMgController],
-  providers: [ AccountService, CifService, AccountMgService],
+  controllers: [ AccountController, CifController, AccountMgController, AcctDetailsController, InquiryController],
+  providers: [ AccountService, CifService, AccountMgService, AcctDetailsService, InquiryService],
 })
 export class AppModule {}
