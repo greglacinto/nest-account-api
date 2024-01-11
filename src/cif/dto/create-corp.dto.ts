@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, IsNumber } from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, MaxLength } from "class-validator";
 
 
 export class CreateCorpDto {
@@ -141,6 +141,7 @@ export class CreateCorpDto {
         example: 'CUSTOMER SHORT NAME', required: true
     })
     @IsNotEmpty()
+    @MaxLength(10)
     shortName: string;
 
     @ApiProperty({
