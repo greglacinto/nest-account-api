@@ -83,7 +83,7 @@ export class CreateMinorDto {
     birthMt: string;
 
     @ApiProperty({
-        example: '1990', required: true
+        example: '2009', required: true
     })
     @IsNotEmpty()
     birthYr: string;
@@ -203,7 +203,7 @@ export class CreateMinorDto {
     guardianCode: string;
 
     @ApiProperty({
-        example: 'R3288179', required: true
+        example: 'R2219174', required: true
     })
     @IsNotEmpty()
     guardianCif: string;

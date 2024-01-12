@@ -51,7 +51,11 @@ export async function controllerHelper(res: IntegratorRes, service: string){
     }
     else {
         const dataBody = FIxml(responseJSON, service)
-        loggerService.log(dataBody)
+
+        if (typeof dataBody["SuccessOrFailure"] !== 'undefined') {
+            if (dataBody["SuccessOrFailure"][0] === "F") 
+                return {"status":"FAILURE", "message": dataBody} 
+        }
 
         return {"status":dataHeader, "message": dataBody}
 
