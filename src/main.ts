@@ -22,7 +22,7 @@ async function bootstrap() {
   
   //enable thick mode
   initOracleClient()
-  //start connectioin pool
+  //start connection pool
   connection()
   
   const port = process.env.PORT || 3000

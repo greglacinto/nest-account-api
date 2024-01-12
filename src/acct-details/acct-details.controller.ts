@@ -1,4 +1,4 @@
-import { Controller, Get, NotFoundException, Query } from '@nestjs/common';
+import { Controller, Get, Logger, NotFoundException, Query } from '@nestjs/common';
 import { getAccountDetailsSQL } from './query/acctDet.query';
 import prepareObject from './helper/prepareObj.helper';
 import { ApiTags } from '@nestjs/swagger';
@@ -8,7 +8,8 @@ import executeSQL from './database/conn.database';
 @ApiTags('account')
 @Controller('account')
 export class AcctDetailsController {
-    
+    private readonly loggerService = new Logger(AcctDetailsController.name)
+
     @Get('/details')
     async getAccount(@Query() query: AccountDto){
         const param = query.accountNumber
@@ -30,7 +31,7 @@ export class AcctDetailsController {
                     accountDetails: resultObj
                 }
         } catch (error) {
-            console.log(error)
+            this.loggerService.error(error)
             throw new NotFoundException(error.message)
         }
     }

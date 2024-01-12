@@ -1,4 +1,4 @@
-import { Controller, Get, NotFoundException, Query } from '@nestjs/common';
+import { Controller, Get, Logger, NotFoundException, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import executeSQL from 'src/acct-details/database/conn.database';
 import { AccountDto } from 'src/acct-details/dto/acct-det.dto';
@@ -10,6 +10,7 @@ import { getTransactionStatusDTDSQL, getTransactionStatusHTDSQL } from './query/
 @ApiTags('inquiry')
 @Controller('inquiry')
 export class InquiryController {
+    private readonly loggerService = new Logger(InquiryController.name)
 
     @Get('/balance')
     async getBalanceInquiry(@Query() query: AccountDto){
@@ -52,7 +53,7 @@ export class InquiryController {
                 accountName: name
             } 
         } catch (error) {
-            console.error(error)
+            this.loggerService.error(error)
             throw new NotFoundException(error.message)
         }
     }
@@ -84,7 +85,7 @@ export class InquiryController {
                 transactionStatus: result.rows[0][0] == 'Y' ? 'Approved' : 'Not Approved'
             } 
         } catch (error) {
-            console.error(error)
+            this.loggerService.error(error)
             throw new NotFoundException(error.message)
         }
     }

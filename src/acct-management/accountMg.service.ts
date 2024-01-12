@@ -33,7 +33,7 @@ export class AccountMgService {
         const response: any = await axios 
             .post(url, soapRequest, config)
             .catch((err: AxiosError) => {
-                this.loggerService.log(err.stack)
+                this.loggerService.error(err.stack)
                 throw new NotFoundException(err.message);
             })
         

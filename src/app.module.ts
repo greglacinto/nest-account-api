@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
@@ -13,6 +13,7 @@ import { AcctDetailsController } from './acct-details/acct-details.controller';
 import { AcctDetailsService } from './acct-details/acct-details.service';
 import { InquiryController } from './inquiry/inquiry.controller';
 import { InquiryService } from './inquiry/inquiry.service';
+import { AppLoggerMiddleware } from './middleware/logger';
 
 @Module({
   imports: [
@@ -26,4 +27,7 @@ import { InquiryService } from './inquiry/inquiry.service';
   controllers: [ AccountController, CifController, AccountMgController, AcctDetailsController, InquiryController],
   providers: [ AccountService, CifService, AccountMgService, AcctDetailsService, InquiryService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AppLoggerMiddleware).forRoutes('*');
+  }}
